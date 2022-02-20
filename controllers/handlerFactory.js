@@ -1,4 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
+const ApiFeatures = require('./../utils/apiFeatures');
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -8,7 +9,12 @@ exports.createOne = (Model) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
-    const docs = await Model.find();
+    const features = new ApiFeatures(Model.find(), req.query)
+      .filter()
+      .sort()
+      .paginate();
+
+    const docs = await features.query;
 
     if (docs.length === 0) {
       res.json({
@@ -37,5 +43,17 @@ exports.deleteOne = (Model) =>
     res.status(204).json({
       status: 'success',
       data: null,
+    });
+  });
+
+exports.getOne = (Modal) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Modal.findById({ _id: req.params.id });
+
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        doc,
+      },
     });
   });
