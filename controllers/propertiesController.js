@@ -3,3 +3,4 @@ const factory = require('./handlerFactory');
 
 exports.createProperty = factory.createOne(Properties);
 exports.getAllProperties = factory.getAll(Properties);
+exports.getOneProperty  = factory.getOne(Properties)

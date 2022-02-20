@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const ApiFeatures = require('./../utils/apiFeatures');
+const AppError = require('./../utils/appError');
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -50,6 +51,11 @@ exports.getOne = (Modal) =>
   catchAsync(async (req, res, next) => {
     const doc = await Modal.findById({ _id: req.params.id });
 
+    if (!doc) {
+      return res.status(404).json({
+        message: 'No data found ',
+      });
+    }
     res.status(200).json({
       status: 'Success',
       data: {

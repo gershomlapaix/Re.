@@ -12,4 +12,6 @@ router
     propertiesController.createProperty
   );
 
+router.route('/:id').get(propertiesController.getOneProperty)
+
 module.exports = router;
