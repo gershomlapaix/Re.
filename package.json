@@ -15,6 +15,15 @@
     "morgan": "^1.10.0"
   },
   "dependencies": {
-    "mongoose": "^6.2.1"
+    "bcryptjs": "^2.4.3",
+    "css-clean": "^1.7.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.3.0",
+    "helmet": "^5.0.2",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
   }
 }

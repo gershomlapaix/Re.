@@ -1,27 +1,27 @@
-const catchAsync = require("../utils/catchAsync");
+const catchAsync = require('../utils/catchAsync');
 
-exports.createOne = (Model) => async (req, res, next) => {
-  try {
+exports.createOne = (Model) =>
+  catchAsync(async (req, res, next) => {
     const newDoc = await Model.create(req.body);
+    res.status(201).json({ status: 'success', data: { newDoc } });
+  });
 
-    res.status(201).json({
-      status: 'success',
-      data: { newDoc },
-    });
+exports.getAll = (Model) =>
+  catchAsync(async (req, res) => {
+    const docs = await Model.find();
 
-    next()
-  } catch (error) {
-      console.log(error);
-  }
-};
-
-// exports.getAll = (Model)=>{
-//   catchAsync(async (req,res)=>{
-//     let filter = {}
-
-//     if
-//   })
-// }
+    if (docs.length === 0) {
+      res.json({
+        status: 'No data found',
+      });
+    } else {
+      res.json({
+        status: 'success',
+        results: docs.length,
+        data: { docs },
+      });
+    }
+  });
 
 exports.deleteOne = (Model) =>
   // returning the handler(refer to the closures)

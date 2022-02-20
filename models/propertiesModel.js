@@ -6,20 +6,22 @@ const propertiesSchema = new mongoose.Schema({
     maxlength: 55,
     minlength: 3,
     required: [true, 'The property name is required'],
+    unique: true,
   },
   category: {
     type: String,
     required: true,
     enum: {
       values: ['electronic', 'hygienic'],
-      message: 'A category may be electronic,eygienic',
+      message: 'A category may be electronic,hygienic',
     },
     required: [true, 'The property needs to be in any category'],
   },
   image: {
-    type: String,
+    type: String,    
   },
 });
 
 const Properties = mongoose.model('Properties', propertiesSchema);
+
 module.exports = Properties;
